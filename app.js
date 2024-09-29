@@ -53,6 +53,20 @@ app.post('/submit-employee-details', (req, res) => {
         });
 });
 
+
+app.delete('/delete-employee/:id', (req, res) => {
+    const employeeId = req.params.id;
+
+    Employee.findByIdAndDelete(employeeId)
+        .then(() => {
+            res.status(200).send('Employee deleted successfully');
+        })
+        .catch((err) => {
+            res.status(500).send('Error deleting employee');
+            console.error(err);
+        });
+});
+
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
 });
